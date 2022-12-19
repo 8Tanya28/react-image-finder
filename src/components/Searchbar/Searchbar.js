@@ -1,39 +1,30 @@
-// import React, { Component } from 'react';
-// import s from './ContactsList.module.css';
-// import shortid from 'shortid';
-// import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
-// const ContactsList = ({ contacts, deleteContact }) => {
-//   // console.log(deleteContact);
-//   return (
-//     <div className={s.contactsList}>
-//       <h2 className={s.text}>CONTACTS</h2>
-//       {contacts.map(contact => (
-//         <li className={s.contact} key={contact.id}>
-//           {contact.name} : {contact.number}{' '}
-//           <button
-//             type="buttun"
-//             onClick={() => {
-//               deleteContact(contact.id);
-//             }}
-//           >
-//             Delete
-//           </button>
-//         </li>
-//       ))}
-//     </div>
-//   );
-// };
+class Searchbar extends Component {
+  static propTypes = { onSubmit: propTypes.func };
+  render() {
+    return (
+      <header className="Searchbar">
+        <form
+          className="SearchForm"
+          onSubmit={event => this.props.onSubmit(event)}
+        >
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
 
-// ContactsList.prototype = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string,
-//       name: PropTypes.string,
-//       number: PropTypes.string,
-//     })
-//   ),
-//   deleteContact: PropTypes.func,
-// };
+          <input
+            className="SearchForm-input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+        </form>
+      </header>
+    );
+  }
+}
 
-// export default ContactsList;
+export default Searchbar;

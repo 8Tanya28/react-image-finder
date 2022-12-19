@@ -1,20 +1,36 @@
-// import React, { Component } from 'react';
-// import s from './Filter.module.css';
-// import { PropTypes } from 'prop-types';
+import React, { Component } from 'react';
 
-// const Filter = ({ value, onChengeFilter }) => {
-//   // console.log(onChengeFilter);
-//   return (
-//     <div>
-//       <label className={s.filter}>Filter</label>
-//       <input type="text" value={value} onChange={onChengeFilter} />
-//     </div>
-//   );
-// };
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import propTypes from 'prop-types';
 
-// Filter.prototype = {
-//   value: PropTypes.string,
-//   onChengeFilter: PropTypes.func,
-// };
+class ImageGallery extends Component {
+  static defaultProps = { imagesArray: propTypes.array };
+  static propTypes = {
+    loader: propTypes.func,
+    imagesArray: propTypes.array,
+    modalFn: propTypes.func,
+  };
+  componentDidMount() {
+    this.props.loader(true);
+  }
 
-// export default Filter;
+  render() {
+    return (
+      <ul className="ImageGallery">
+        {this.props.imagesArray.map((image, idx) => {
+          return (
+            <ImageGalleryItem
+              key={image.id}
+              imageLink={image.webformatURL}
+              imagAlt={image.tags}
+              largeImageURL={image.largeImageURL}
+              modalFn={this.props.modalFn}
+            />
+          );
+        })}
+      </ul>
+    );
+  }
+}
+
+export default ImageGallery;
